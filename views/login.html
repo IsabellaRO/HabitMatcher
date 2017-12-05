@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+
+  <title>Habit Matcher</title>
+  
+  <!-- favicon -->
+    <link rel="shortcut icon" href="images/ico/favicon.jpg">
+    <link rel="GG" sizes="144x144" href="images/ico/GG.png">
+    <link rel="G" sizes="114x114" href="images/ico/G.png">
+    <link rel="M" sizes="72x72" href="images/ico/M.png">
+    <link rel="P" href="images/ico/P.png">
+  
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/prettyPhoto.css" />
+  <link rel="stylesheet" type="text/css" href="css/unslider.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        var email, senha;
+        $("#submit").click(function(){    
+          email=$("#email").val();
+          senha=$("#senha").val();
+          $.post("http://localhost:3000/login",{email: email, senha: senha}, function(data){
+            if(data==='done')
+              {
+                alert("success");
+              }
+          });
+          });
+        });
+    </script>
+
+</head>
+
+<body data-target="#nino-navbar" data-spy="scroll">
+
+  <!-- Header
+    ================================================== -->
+<header id="nino-header">
+    <div id="nino-headerInner">         
+      <nav id="nino-navbar" class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="nino-menuItem pull-right">
+            <div class="collapse navbar-collapse pull-left" id="nino-navbar-collapse">
+            </div><!-- /.navbar-collapse -->
+          </div>
+        </div><!-- /.container-fluid -->
+      </nav>
+
+      <section id="nino-slider" class="carousel slide container" data-ride="carousel">
+            <h2 class="nino-sectionHeading">
+            <span class="nino-subHeading">Habit Matcher</span>Login</h2>
+      </section>
+    </div>
+  </header>
+
+            <section id="perfil">
+    <div class="container">
+            <center><form action="/login" method="post" class="FiltrarForm">
+              <div class="input-group input-group-lg">
+                <input type="email" class="form-control" placeholder="Email" name="email" required>
+                <input type="password" class="form-control" placeholder="Senha" name="senha" required>
+                <p>
+                <br>
+                </p>
+                <input class="btn btn-success" type="submit" value="Entrar"></input>
+              </div>
+            </form>
+            <p>
+            <br>
+            </p>
+            Ainda não faz parte? <a href="signup">Cadastre-se</a></center>
+            <br>
+          </div>
+        </div>
+        </section>
+        </body>
+        </html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+
+	<title>Habit Matcher</title>
+	
+	<!-- favicon -->
+    <link rel="shortcut icon" href="images/ico/favicon.jpg">
+    <link rel="GG" sizes="144x144" href="images/ico/GG.png">
+    <link rel="G" sizes="114x114" href="images/ico/G.png">
+    <link rel="M" sizes="72x72" href="images/ico/M.png">
+    <link rel="P" href="images/ico/P.png">
+	
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/prettyPhoto.css" />
+	<link rel="stylesheet" type="text/css" href="css/unslider.css" />
+	<link rel="stylesheet" type="text/css" href="css/template.css" />
+
+	<script>
+      $(document).ready(function(){
+        var filtro;
+        $("#submit").click(function(){
+          filtro=$("#filtro").val();
+          $.post("http://localhost:3000/usuarios",{filtro:filtro}, function(data){
+              if(data==='done'){
+                  alert("success");
+              }
+            });
+          });
+        });
+    </script>
+
+</head>
+
+<body data-target="#nino-navbar" data-spy="scroll">
+
+	<!-- Header
+    ================================================== -->
+	<header id="nino-header">
+		<div id="nino-headerInner">					
+			<nav id="nino-navbar" class="navbar navbar-default" role="navigation">
+				<div class="container">
+
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nino-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="perfil">Habit Matcher</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="nino-menuItem pull-right">
+						<div class="collapse navbar-collapse pull-left" id="nino-navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li><a id="home" href="perfil">Meu Perfil</a></li>
+								<script type="text/javascript">
+								document.getElementById("home").onclick = function () {
+    								location.href = "perfil";
+								};</script>
+								<li><a id="seus_eventos" href="seus_eventos">Meus Eventos</a></li>
+								<script type="text/javascript">
+								document.getElementById("seus_eventos").onclick = function () {
+    								location.href = "seus_eventos";
+								};</script>
+								<li class="active"><a href="#usuarios">Encontre Pessoas<span class="sr-only">(current)</span></a></li>
+								<li><a id="eventos" href="eventos">Encontre Eventos</a></li>
+								<script type="text/javascript">
+								document.getElementById("eventos").onclick = function () {
+    								location.href = "eventos";
+								};</script>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+						<ul class="nino-iconsGroup nav navbar-nav">
+							<li><a id="login" href="#" class="nino-search"><i class="mdi mdi-logout nino-icon"></i></a></li>
+							<script type="text/javascript">
+								document.getElementById("login").onclick = function () {
+    								location.href = "login";
+								};</script>
+						</ul>
+					</div>
+				</div><!-- /.container-fluid -->
+			</nav>
+			</div>
+			</header>
+
+    <section id="usuarios">
+		<div class="container">
+			<h2 class="nino-sectionHeading">
+				<span class="nino-subHeading">Encontre pessoas</span>
+				com interesses parecidos com os seus
+			</h2>
+			<br>
+		</div>
+		<div class="sectionContent">
+			<ul class="nino-portfolioItems">
+				<% for(var usuario = 0; usuario < users.length; usuario++){ %>
+				<li class="item">
+					<a class="nino-prettyPhoto" href="user/<%=users[usuario].usuario_id%>"/>
+						<img src="http://localhost:3000/<%=users[usuario].foto%>"/>
+						<div class="overlay">
+							<div class="content">
+								<i class="mdi mdi-account nino-icon"></i>
+								<h4 class="title"><%= users[usuario].nome %></h4>
+								<%var interesses = [];
+								if(users[usuario].low_carb=='s'){
+									interesses.push(" Low carb");
+								}
+								if(users[usuario].vegano=='s'){
+									interesses.push(" Vegano");
+								}
+								if(users[usuario].vegetariano=='s'){
+									interesses.push(" Vegetariano");
+								}
+								if(users[usuario].sem_glutem=='s'){
+									interesses.push(" Sem glúten");
+								}
+								if(users[usuario].sem_lactose=='s'){
+									interesses.push(" Sem lactose");
+								}		
+								if(users[usuario].cross_fit=='s'){
+									interesses.push(" Cross fit");
+								}
+								if(users[usuario].esporte_coletivo=='s'){
+									interesses.push(" Esportes coletivos");
+								}
+								if(users[usuario].esporte_aventura=='s'){
+									interesses.push(" Esportes de aventura");
+								}
+								if(users[usuario].luta=='s'){
+									interesses.push(" Luta");
+								}
+								if(users[usuario].yoga=='s'){
+									interesses.push(" Yoga");
+								}
+
+					            %>
+								<span class="desc"><%=interesses%></span>
+							</div>
+						</div>
+					</a>
+				</li>
+				<% 
+				interesses = [];
+				} %>
+			</ul>
+		</div>
+	</section><!--/#nino-portfolio-->
+	<br>
+	<br>
+	
+    <!-- Footer
+    ================================================== -->
+    <footer id="footer">
+        <div class="container">
+        	<div class="row">
+        		<div class="col-md-4">
+        			<div class="colInfo">
+
+	        			
+        			</div>
+        		</div>
+   
+        	</div>
+			<div class="nino-copyright">Copyright &copy; 2017</div>
+        </div>
+    </footer><!--/#footer-->
+
+	<a href="#" id="nino-scrollToTop">Go to Top</a>
+	
+	<!-- javascript -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>	
+	<script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+	<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.hoverdir.js"></script>
+	<script type="text/javascript" src="js/modernizr.custom.97074.js"></script>
+	<script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script type="text/javascript" src="js/unslider-min.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!-- css3-mediaqueries.js for IE less than 9 -->
+	<!--[if lt IE 9]>
+	    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+		
+</body>
+</html>
